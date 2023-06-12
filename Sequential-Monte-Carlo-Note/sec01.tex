@@ -1,0 +1,45 @@
+\section{State-Space Model}
+
+\subsection{A First Definition}
+
+\begin{itemize}
+    \item A state-space model is a time series model.
+    \item It consists of two discrete-time processes
+    \begin{equation}
+        \pbrace*{X_{t}} \doteq \paren*{X_{t}}_{t \geq 0}
+        \,, \quad
+        \pbrace*{Y_{t}} \doteq \paren*{Y_{t}}_{t \geq 0}
+    \end{equation}
+    \item The joint density of the processes via a factorization
+    \begin{equation}
+        p_{0} \paren*{x_{0}; \theta}
+        \prod_{t = 0}^{T} f_{t} \paren*{ y_{t} \vert x_{t} , \theta}
+        \prod_{t = 0}^{T} p_{t} \paren*{ x_{t} \vert x_{t-1} , \theta}
+    \end{equation}
+    \item The full likelihood of a dataset $y_{0:T}$
+    \begin{equation}
+        p_{T} \paren*{y_{0:T}; \theta} =
+        p_{0} \paren*{ y_{0}; \theta}
+        \prod_{t = 1}^{T} p_{t} \paren*{ y_{t} \vert y_{0:t-1} , \theta}
+    \end{equation}
+\end{itemize}
+
+\subsection{Sequential Analysis of State-Space Models}
+
+\begin{itemize}
+    \item \textbf{Filtering}: deriving the distribution of $X_{t}$ conditional on $Y_{0:t} = y_{0:t}$ for $t = 0, 1, \ldots$
+    \item \textbf{State prediction}: deriving the distribution of $X_{t+1}$ (more generally $X_{t+1:t+h}$ for $h \geq 1$) conditional on $Y_{0:t} = y_{0:t}$ for $t = 0, 1, \ldots$
+    \item \textbf{Fixed-lag smoothing}: deriving the distribution of $X_{t - h:t}$ for $h \geq 1$ conditional on $Y_{0:t} = y_{0:t}$ for $t = h, h+1, \ldots$
+    \item \textbf{(Complete) Smoothing}: deriving the distribution of $X_{0:t}$ given $Y_{0:t} = y_{0:t}$ for $t = 0, 1, \ldots$
+    \item \textbf{Data prediction}: deriving the law of $Y_{t+1:t+h}$ conditional on $Y_{0:t} = y_{0:t}$ for $h \geq 1$ and $t = 0, 1, \ldots$
+    \item \textbf{Computation of the likelihood factor} $p_{t} \paren*{y_{t} \vert y_{0:t-1}}$
+\end{itemize}
+
+\subsection*{Notation / Terminology}
+
+\begin{itemize}
+    \item Upper case: random variables
+    \item Lower case: realizations
+    \item Collections of random variables: $Y_{0:t} = \paren*{Y_{0}, \ldots, Y_{t}}$
+    \item Collections of realizations: $y_{0:t} = \paren*{y_{0}, \ldots, y_{t}}$
+\end{itemize}
