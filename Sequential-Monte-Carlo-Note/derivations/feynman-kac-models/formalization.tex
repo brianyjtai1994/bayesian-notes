@@ -1,0 +1,33 @@
+\textbf{\# Formalization}
+%
+\begin{align}
+    \mathbb{Q}_{t} \paren*{dx_{0:t}} &=
+        \dfrac{1}{L_{t}} \,
+        G_{0} \paren*{x_{0}} \cdot \bracket*{
+            \prod_{s = 1}^{{t}} G_{s} \paren*{x_{s - 1}, x_{s}}
+        }
+        \cdot \mathbb{M}_{t} \paren*{dx_{0:t}}
+    \nonumber \\[1.5ex] &=
+        \dfrac{1}{L_{t}} \,
+        G_{0} \paren*{x_{0}} \cdot \bracket*{
+            \prod_{s = 1}^{{t}} G_{s} \paren*{x_{s - 1}, x_{s}}
+        }
+        \cdot \mathbb{M}_{t-1} \paren*{dx_{0:t-1}} \cdot
+        M_{t} \paren*{x_{t-1}, dx_{t}}
+    \nonumber \\[1.5ex] &=
+        \dfrac{L_{t-1}}{L_{t}} \,
+        G_{t} \paren*{x_{t - 1}, x_{t}} \cdot \pbrace*{
+            \dfrac{1}{L_{t-1}} \,
+            G_{0} \paren*{x_{0}} \cdot \bracket*{
+                \prod_{s = 1}^{{t-1}} G_{s} \paren*{x_{s - 1}, x_{s}}
+            }
+            \cdot \mathbb{M}_{t-1} \paren*{dx_{0:t-1}}
+        }
+        \cdot M_{t} \paren*{x_{t-1}, dx_{t}}
+    \nonumber \\[1.5ex] &=
+        \dfrac{1}{\ell_{t}} \,
+        G_{t} \paren*{x_{t - 1}, x_{t}}
+        \cdot \mathbb{Q}_{t-1} \paren*{dx_{0:t-1}}
+        \cdot M_{t} \paren*{x_{t-1}, dx_{t}}
+        \label{appendix.eq.forward-recursion.formalization}
+\end{align}

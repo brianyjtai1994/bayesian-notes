@@ -8,7 +8,16 @@
 \maketitle
 % = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 \input{state-space-model}
-\input{feynman-kac-models}
+\input{./feynman-kac-models/feynman-kac-models}
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\newpage
+\appendix
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\theequation}{S\arabic{equation}}
+\setcounter{figure}{0}
+\setcounter{equation}{0}
+\input{./derivations/feynman-kac-models/feynman-kac-models}
 % = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 % \printbibliography
 \end{document}

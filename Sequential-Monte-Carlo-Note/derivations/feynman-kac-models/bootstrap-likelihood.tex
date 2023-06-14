@@ -1,0 +1,33 @@
+\textbf{\# For the likelihood:} \label{appendix.sec.bootstrap-likelihood}
+%
+\begin{equation*}
+    p_{t} \paren*{y_{t} \vert y_{0:t-1}}
+\end{equation*}
+%
+According to Eq. \eqref{eq.forward-recursion.marginal} of marginalization:
+%
+\begin{equation*}
+    1 = \int_{x_{t-1:t} \in \mathcal{X}^{2}}
+        \mathbb{Q}_{t} \paren*{dx_{t-1:t}}
+\end{equation*}
+%
+, together with Eq. \eqref{eq.forward-recursion.measure-change} leads to
+%
+\begin{align*}
+    1 &=
+        \dfrac{1}{\ell_{t}}
+        \int_{x_{t-1:t} \in \mathcal{X}^{2}}
+        G_{t} \paren*{x_{t-1}, x_{t}} \cdot
+        \mathbb{Q}_{t-1} \paren*{dx_{t-1:t}}
+    \\[1.5ex]
+    &=
+        \dfrac{1}{ p_{t} \paren*{ y_{t} \vert y_{0:t-1} } }
+        \int_{x_{t-1:t} \in \mathcal{X}^{2}}
+        f_{t} \paren*{ y_{t} \vert x_{t} } \cdot
+        \mathbb{P}_{t-1} \paren*{ X_{t-1:t} \in dx_{t-1:t} \vert Y_{0:t-1} = y_{0:t-1}}
+    \\[1.5ex]
+    p_{t} \paren*{ y_{t} \vert y_{0:t-1} } &=
+        \int_{x_{t} \in \mathcal{X}}
+        f_{t} \paren*{ y_{t} \vert x_{t} } \cdot
+        \mathbb{P}_{t-1} \paren*{ X_{t} \in dx_{t} \vert Y_{0:t-1} = y_{0:t-1}}
+\end{align*}

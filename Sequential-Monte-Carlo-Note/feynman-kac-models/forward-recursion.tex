@@ -1,0 +1,144 @@
+\subsection{Forward Recursion}
+%
+The Markov measures are related in a simple way:
+%
+\begin{equation}
+    \mathbb{M}_{t} \paren*{dx_{0:t}} =
+        % \mathbb{M}_{0:t-1} \paren*{dx_{t-1}} \cdot
+        \mathbb{M}_{t-1} \paren*{dx_{0:t-1}} \cdot
+        M_{t} \paren*{x_{t-1}, dx_{t}}
+\end{equation}
+%
+Derive from the definition of $\mathbb{Q}_{t}$ (Eq. \eqref{appendix.eq.forward-recursion.formalization})
+%
+\begin{equation}
+    \boxed{
+        \mathbb{Q}_{t} \paren*{dx_{0:t}} =
+            \dfrac{1}{\ell_{t}} \,
+            G_{t} \paren*{x_{t - 1}, x_{t}}
+            \cdot \mathbb{Q}_{t-1} \paren*{dx_{0:t-1}}
+            \cdot M_{t} \paren*{x_{t-1}, dx_{t}}
+    }
+\end{equation}
+%
+\textbf{\# Forward Recursion (Feynman-Kac Formalism)}
+
+Initialize with $\mathbb{Q}_{-1} \paren*{dx_{0}} = \mathbb{M}_{0} \paren*{dx_{0}}$, then for $t \in \bracket*{0, T}$,
+%
+\begin{itemize}
+    \item Marginalization:
+    %
+    \begin{equation} \label{eq.forward-recursion.marginal}
+        \boxed{
+            \mathbb{Q}_{t} \paren*{dx_{t}} =
+                \int_{x_{t-1} \in \mathcal{X}}
+                \mathbb{Q}_{t} \paren*{dx_{t-1:t}}
+        }
+    \end{equation}
+    %
+    \item Extension: Derive from Eq. \eqref{eq.FK.02} as Eq. \eqref{appendix.eq.forward-recursion.extension}:
+    %
+    \begin{equation} \label{eq.forward-recursion.extension}
+        \boxed{
+            \mathbb{Q}_{\color{text-blue} t-1}
+                \paren*{dx_{\color{text-red} t-1:t}}
+            =
+                \mathbb{Q}_{\color{text-blue} t-1}
+                    \paren*{dx_{\color{text-red} t-1}}
+                \cdot M_{t} \paren*{x_{t-1}, dx_{t}}
+        }
+    \end{equation}
+    %
+    \item Change of measure: Derive from Eq. \eqref{eq.FK.02} as Eq. \eqref{appendix.eq.forward-recursion.measure-change}:
+    %
+    \begin{equation} \label{eq.forward-recursion.measure-change}
+        \boxed{
+            \mathbb{Q}_{\color{text-red} t} \paren*{dx_{\color{text-blue} t-1:t}} =
+                \dfrac{1}{\ell_{\color{text-red} t}} \,
+                G_{\color{text-red} t} \paren*{x_{t-1}, x_{t}} \cdot
+                \mathbb{Q}_{\color{text-red} t-1}
+                    \paren*{dx_{\color{text-blue} t-1:t}}
+        }
+    \end{equation}
+    %
+    with
+    %
+    \begin{align*}
+        \ell_{0} \doteq L_{0} &=
+            \int_{\mathcal{X}}
+            G_{0} \paren*{x_{0}} \cdot
+            \mathbb{M}_{0} \paren*{dx_{0}}
+        \\[1.5ex]
+        \ell_{t} \doteq \dfrac{L_{t}}{L_{t-1}} &=
+            \int_{\mathcal{X}^{2}}
+            G_{t} \paren*{x_{t-1}, x_{t}} \cdot
+            \mathbb{Q}_{t-1} \paren*{dx_{t-1:t}}
+            \,, \quad t \geq 1
+    \end{align*}
+\end{itemize}
+%
+\subsubsection{Implications for Bootstrap Formalism State-Space Models}
+%
+The bootstrap formalism is
+%
+\begin{alignat*}{3}
+    \mathbb{M}_{0} \paren*{dx_{0}} &\leftarrow
+        \mathbb{P}_{0} \paren*{dx_{0}}
+    & \qquad
+    G_{0} \paren*{x_{0}} &\leftarrow
+        f_{0} \paren*{ y_{0} \vert x_{0} }
+    \\[1.5ex]
+    M_{t} \paren*{x_{t-1}, dx_{t}} &\leftarrow
+        P_{t} \paren*{x_{t-1}, dx_{t}}
+    & \qquad
+    G_{t} \paren*{x_{t-1}, x_{t}} &\leftarrow
+        f_{t} \paren*{ y_{t} \vert x_{t} }
+    \,.
+\end{alignat*}
+%
+, where $\mathbb{M} \leftarrow \mathbb{P}$ is a measure of hidden states $x_{t}$ and the changed measure $\mathbb{Q}$ is a measure of observations $y_{t}$.
+
+\textbf{\# For the likelihood:}
+%
+According to Sec. \ref{appendix.sec.bootstrap-likelihood}:
+%
+\begin{equation*}
+    \boxed{
+        p_{t} \paren*{ y_{t} \vert y_{0:t-1} } =
+            \int_{x_{t} \in \mathcal{X}}
+            f_{t} \paren*{ y_{t} \vert x_{t} } \cdot
+            \mathbb{P}_{t-1} \paren*{ X_{t} \in dx_{t} \vert Y_{0:t-1} = y_{0:t-1}}
+    }
+\end{equation*}
+%
+\textbf{\# For the prediction:}
+%
+According to Sec. \ref{appendix.sec.bootstrap-prediction}:
+%
+\begin{equation*}
+    \boxed{
+        \mathbb{P}_{t-1}
+            \paren*{ X_{t} \in dx_{t} \vert Y_{0:t-1} = y_{0:t-1}}
+        =
+            \int_{x_{t-1} \in \mathcal{X}} \mathbb{P}_{t-1}
+            \paren*{ X_{t-1} \in dx_{t-1} \vert Y_{0:t-1} = y_{0:t-1}}
+            \cdot P_{t} \paren*{x_{t-1}, dx_{t}}
+    }
+\end{equation*}
+%
+\textbf{\# For the filtering:}
+%
+According to Sec. \ref{appendix.sec.bootstrap-filtering}:
+%
+\begin{equation*}
+    \boxed{
+        \mathbb{P}_{t} \paren*{ X_{t} \in dx_{t} \vert Y_{0:t} = y_{0:t}}
+        =
+            \dfrac{
+                f_{t} \paren*{ y_{t} \vert x_{t} }
+            }{
+                p_{t} \paren*{ y_{t} \vert y_{0:t-1} }
+            }
+            \mathbb{P}_{t-1} \paren*{ X_{t} \in dx_{t} \vert Y_{0:t-1} = y_{0:t-1}}
+    }
+\end{equation*}

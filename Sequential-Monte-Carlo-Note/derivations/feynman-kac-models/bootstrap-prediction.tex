@@ -1,0 +1,31 @@
+\textbf{\# For the prediction:} \label{appendix.sec.bootstrap-prediction}
+%
+\begin{equation*}
+    \mathbb{P}_{t} \paren*{ X_{t+1} \in dx_{t+1} \vert Y_{0:t} = y_{0:t} }
+\end{equation*}
+%
+According to Eq. \eqref{eq.forward-recursion.extension} of extension:
+%
+\begin{equation*}
+    \mathbb{Q}_{t-1} \paren*{dx_{t-1:t}} =
+        \mathbb{Q}_{t-1} \paren*{dx_{t-1}}
+        \cdot M_{t} \paren*{x_{t-1}, dx_{t}}
+\end{equation*}
+%
+, which leads to
+%
+\begin{align*}
+    \int_{x_{t-1} \in \mathcal{X}} \mathbb{P}_{t-1}
+        \paren*{ X_{t-1:t} \in dx_{t-1:t} \vert Y_{0:t-1} = y_{0:t-1}}
+    &=
+        \int_{x_{t-1} \in \mathcal{X}} \mathbb{P}_{t-1}
+        \paren*{ X_{t-1} \in dx_{t-1} \vert Y_{0:t-1} = y_{0:t-1}}
+        \cdot P_{t} \paren*{x_{t-1}, dx_{t}}
+    \\[1.5ex]
+    \mathbb{P}_{t-1}
+        \paren*{ X_{t} \in dx_{t} \vert Y_{0:t-1} = y_{0:t-1}}
+    &=
+        \int_{x_{t-1} \in \mathcal{X}} \mathbb{P}_{t-1}
+        \paren*{ X_{t-1} \in dx_{t-1} \vert Y_{0:t-1} = y_{0:t-1}}
+        \cdot P_{t} \paren*{x_{t-1}, dx_{t}}
+\end{align*}

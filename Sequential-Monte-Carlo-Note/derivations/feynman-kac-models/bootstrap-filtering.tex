@@ -1,0 +1,38 @@
+\textbf{\# For the filtering:} \label{appendix.sec.bootstrap-filtering}
+%
+\begin{equation*}
+    \mathbb{P}_{t} \paren*{ X_{t} \in dx_{t} \vert Y_{0:t} = y_{0:t}}
+\end{equation*}
+%
+According to Eq. \eqref{eq.forward-recursion.measure-change} of measure change:
+%
+\begin{equation*}
+    \mathbb{Q}_{t} \paren*{dx_{t-1:t}} =
+        \dfrac{1}{\ell_{t}} \,
+        G_{t} \paren*{x_{t-1}, x_{t}} \cdot
+        \mathbb{Q}_{t-1} \paren*{dx_{t-1:t}}
+\end{equation*}
+%
+, which leads to
+%
+\begin{align*}
+    \int_{x_{t-1} \in \mathcal{X}} \mathbb{P}_{t}
+        \paren*{ X_{t-1:t} \in dx_{t-1:t} \vert Y_{0:t} = y_{0:t}}
+    &=
+        \dfrac{
+            f_{t} \paren*{ y_{t} \vert x_{t} }
+        }{
+            p_{t} \paren*{ y_{t} \vert y_{0:t-1} }
+        }
+        \int_{x_{t-1} \in \mathcal{X}} \mathbb{P}_{t-1}
+            \paren*{ X_{t-1:t} \in dx_{t-1:t} \vert Y_{0:t-1} = y_{0:t-1}}
+    \\[1.5ex]
+    \mathbb{P}_{t} \paren*{ X_{t} \in dx_{t} \vert Y_{0:t} = y_{0:t}}
+    &=
+        \dfrac{
+            f_{t} \paren*{ y_{t} \vert x_{t} }
+        }{
+            p_{t} \paren*{ y_{t} \vert y_{0:t-1} }
+        }
+        \mathbb{P}_{t-1} \paren*{ X_{t} \in dx_{t} \vert Y_{0:t-1} = y_{0:t-1}}
+\end{align*}

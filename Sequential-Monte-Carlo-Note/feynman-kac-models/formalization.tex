@@ -1,0 +1,146 @@
+\subsection{Feynman-Kac Formalization}
+%
+The starting point is a Markov probability law defined on a state space $\mathcal{X}$, with initial distribution $\mathbb{M}_{0}$ and transition kernels $M_{1:T}$:
+%
+\begin{equation}
+    \mathbb{M}_{T} \paren*{dx_{0:T}} =
+        \mathbb{M}_{0} \paren*{dx_{0}}
+        \prod_{t = 1}^{T} M_{t} \paren*{x_{t-1}, dx_{t}}
+\end{equation}
+%
+Consider a sequence of so-called potential functions, $G_{0}: \mathcal{X} \to \mathbb{R}^{+}$, and $G_{t}: \mathcal{X}^{2} \to \mathbb{R}^{+}$, for $t \in \bracket{1, T}$.
+%
+Then, we have the following changes of measure from $\mathbb{M}_{\color{text-red} t}$ (of $dx_{0:t}$) to $\mathbb{Q}_{\color{text-red} t'}$ (of $dx_{0:t}$) where $t \neq t'$ is allowed:
+%
+\begin{equation} \label{eq.FK.02}
+    \begin{aligned}
+    \mathbb{Q}_{\color{text-red} t'} \paren*{dx_{\color{text-blue} 0:t}} &=
+        \dfrac{1}{L_{\color{text-red} t'}} \,
+        G_{0} \paren*{x_{0}} \cdot \bracket*{
+            \prod_{s = 1}^{{\color{text-red} t'}} G_{s} \paren*{x_{s - 1}, x_{s}}
+        }
+        \cdot \mathbb{M}_{\color{text-blue} t} \paren*{dx_{\color{text-blue} 0:t}}
+    \\[1.5ex]
+    \mathbb{Q}_{\color{text-red} t} \paren*{dx_{\color{text-blue} 0:T}} &=
+        \dfrac{1}{L_{\color{text-red} t}} \,
+        G_{0} \paren*{x_{0}} \cdot \bracket*{
+            \prod_{s = 1}^{{\color{text-red} t}} G_{s} \paren*{x_{s - 1}, x_{s}}
+        }
+        \cdot \mathbb{M}_{\color{text-blue} T} \paren*{dx_{\color{text-blue} 0:T}}
+    \end{aligned}
+\end{equation}
+%
+Let $\mathbb{Q}_{-1} \paren*{dx_{0:T}} = \mathbb{M}_{T} \paren*{dx_{0:T}}$ for convenience.
+%
+Consider a state-space model with
+%
+\begin{itemize}
+    \item initial distribution $\mathbb{P}_{0} \paren*{dx_{0}}$
+    \item signal transition kernels $P_{t} \paren*{x_{t-1}, dx_{t}}$
+    \item observation densities $f_{t} \paren*{ y_{t} \vert x_{t} }$
+\end{itemize}
+
+\textbf{\#1 The Bootstrap Feynman-Kac Formalism of a State-Space Model}
+%
+\begin{alignat*}{3}
+    \mathbb{M}_{0} \paren*{dx_{0}} &\leftarrow
+        \mathbb{P}_{0} \paren*{dx_{0}}
+    & \qquad
+    G_{0} \paren*{x_{0}} &\leftarrow
+        f_{0} \paren*{ y_{0} \vert x_{0} }
+    \\[1.5ex]
+    M_{t} \paren*{x_{t-1}, dx_{t}} &\leftarrow
+        P_{t} \paren*{x_{t-1}, dx_{t}}
+    & \qquad
+    G_{t} \paren*{x_{t-1}, x_{t}} &\leftarrow
+        f_{t} \paren*{ y_{t} \vert x_{t} }
+    \,.
+\end{alignat*}
+%
+Then, measure $\mathbb{M}$ refers to the hidden states $dx_{0:t}$ and the potential functions $G_{t}$ modify the observations $y_{0:t}$ and the subscript of $\mathbb{Q}_{t}$: 
+%
+\begin{equation}
+    \begin{aligned}
+    \mathbb{Q}_{\color{text-red} t-1}
+        \paren*{dx_{0:\color{text-blue}{t}}} &\leftarrow
+        \mathbb{P}_{\color{text-blue}{t}} \paren*{
+            X_{0:\color{text-blue}{t}} \in dx_{0:\color{text-blue}{t}}
+            \vert
+            Y_{0:\color{text-red}{t-1}} = y_{0:\color{text-red}{t-1}}
+        }
+    \\[1.5ex]
+    \mathbb{Q}_{\color{text-red} t}
+        \paren*{dx_{0:\color{text-blue}{t}}} &\leftarrow
+        \mathbb{P}_{\color{text-blue}{t}} \paren*{
+            X_{0:\color{text-blue}{t}} \in dx_{0:\color{text-blue}{t}}
+            \vert
+            Y_{0:\color{text-red}{t}} = y_{0:\color{text-red}{t}}
+        }
+    \\[1.5ex]
+    L_{t} = p_{t} \paren*{y_{0:t}}
+    \,, & \qquad
+    \ell_{t} \doteq \dfrac{L_{t}}{L_{t-1}} =
+        p_{t} \paren*{ y_{t} \vert y_{0:t-1} }
+    \end{aligned}
+\end{equation}
+
+\textbf{\#2 The Guided Feynman-Kac Formalism of a State-Space Model}
+%
+\begin{equation}
+    \begin{aligned}
+    G_{0} \paren*{x_{0}} \mathbb{M}_{0} \paren*{dx_{0}} &\leftarrow
+        f_{0} \paren*{ y_{0} \vert x_{0} } \mathbb{P}_{0} \paren*{dx_{0}}
+    \\[1.5ex]
+    G_{t} \paren*{x_{t-1}, x_{t}} M_{t} \paren*{x_{t-1}, dx_{t}} &\leftarrow
+        f_{t} \paren*{ y_{t} \vert x_{t} } P_{t} \paren*{x_{t-1} , dx_{t}}
+    \end{aligned}
+    \,.
+\end{equation}
+%
+Then, measure $\mathbb{M}$ refers to the hidden states $dx_{0:t}$ and the potential functions $G_{t}$ modify the observations $y_{0:t}$ and the subscript of $\mathbb{Q}_{t}$: 
+%
+\begin{equation}
+    \begin{aligned}
+    \mathbb{Q}_{t-1} \paren*{dx_{0:t-1}}
+    P_{t-1} \paren*{x_{t-1}, dx_{t}}
+    &\leftarrow
+        \mathbb{P}_{t} \paren*{
+            X_{0:t} \in dx_{0:t}
+            \vert
+            Y_{0:t-1} = y_{0:t-1}
+        }
+    \\[1.5ex]
+    \mathbb{Q}_{\color{text-red} t}
+        \paren*{dx_{0:\color{text-blue}{t}}} &\leftarrow
+        \mathbb{P}_{\color{text-blue}{t}} \paren*{
+            X_{0:\color{text-blue}{t}} \in dx_{0:\color{text-blue}{t}}
+            \vert
+            Y_{0:\color{text-red}{t}} = y_{0:\color{text-red}{t}}
+        }
+    \\[1.5ex]
+    L_{t} = p_{t} \paren*{y_{0:t}}
+    \,, & \qquad
+    \ell_{t} \doteq \dfrac{L_{t}}{L_{t-1}} =
+        p_{t} \paren*{ y_{t} \vert y_{0:t-1} }
+    \end{aligned}
+\end{equation}
+%
+It becomes the bootstrap Feynman-Kac formalism by taking $G_{t} \paren*{x_{t-1}, x_{t}} = f_{t} \paren*{ y_{t} \vert x_{t} }$ and $M_{t} \paren*{x_{t-1}, dx_{t}} = P_{t} \paren*{x_{t-1}, dx_{t}}$.
+
+\textbf{\#3 The Auxiliary Feynman-Kac Formalism of a State-Space Model}
+%
+\begin{equation}
+    \begin{aligned}
+    G_{0} \paren*{x_{0}} \mathbb{M}_{0} \paren*{dx_{0}} &\leftarrow
+        f_{0} \paren*{ y_{0} \vert x_{0} }
+        \mathbb{P}_{0} \paren*{dx_{0}}
+        \eta_{0} \paren*{x_{0}}
+    \\[1.5ex]
+    G_{t} \paren*{x_{t-1}, x_{t}} M_{t} \paren*{x_{t-1}, dx_{t}} &\leftarrow
+        f_{t} \paren*{ y_{t} \vert x_{t} }
+        P_{t} \paren*{x_{t-1} , dx_{t}}
+        \, \dfrac{\eta_{t} \paren*{x_{t}}}{ \eta_{t-1} \paren*{x_{t-1}}}
+    \end{aligned}
+\end{equation}
+%
+for certain functions $\eta_{t} : \mathcal{X} \to \mathbb{R}^{+}$ s.t. $\mathbb{E}_{\mathbb{P}_{t}} \bracket*{ \eta_{t} \paren*{X_{t}} \vert Y_{0:t} = y_{0:t} } < \infty$ for all $t$.
